@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salão do Arnaldo - Cortes & Barba Estilizados</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        :root { --primary:#d4af37; --bg-dark:#121212; --bg-card:#1c1c1c; --text-light:#fff; --text-muted:#a0a0a0; }
+        body { background-color:var(--bg-dark); color:var(--text-light); line-height:1.6; }
+        header { background:#000; padding:20px; text-align:center; border-bottom:3px solid var(--primary); position:sticky; top:0; z-index:1000; }
+        header h1 { color:var(--primary); font-size:2.5rem; text-transform:uppercase; letter-spacing:2px; }
+        header p { font-size:1rem; color:var(--text-muted); }
+        .container { max-width:1000px; margin:0 auto; padding:40px 20px; }
+        .section-title { text-align:center; font-size:2rem; margin-bottom:30px; color:var(--primary); text-transform:uppercase; }
+        .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+        .service-card { background:var(--bg-card); border:1px solid #333; border-radius:8px; padding:20px; text-align:center; transition:.3s; }
+        .service-card:hover { transform:translateY(-5px); border-color:var(--primary); }
+        .service-card h3 { font-size:1.5rem; margin-bottom:10px; }
+        .service-card .price { font-size:1.3rem; color:var(--primary); font-weight:bold; margin-bottom:15px; }
+        .booking-section { background:var(--bg-card); border-radius:8px; padding:30px; border:1px solid #333; max-width:600px; margin:0 auto; }
+        .form-group { margin-bottom:20px; }
+        .form-group label { display:block; margin-bottom:8px; font-weight:bold; color:var(--text-light); }
+        .form-group input,.form-group select { width:100%; padding:12px; border:1px solid #444; background:#2b2b2b; color:#fff; border-radius:5px; font-size:1rem; }
+        .form-group input:focus,.form-group select:focus { outline:none; border-color:var(--primary); }
+        .btn-submit { width:100%; background:#25d366; color:#fff; border:none; padding:15px; font-size:1.1rem; font-weight:bold; border-radius:5px; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:10px; transition:.3s; }
+        .btn-submit:hover { background:#1ebd5c; }
+        footer { text-align:center; padding:30px; background:#000; color:var(--text-muted); border-top:1px solid #222; margin-top:60px; font-size:.95rem; line-height:1.8; }
+        footer p strong { color:var(--primary); }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Salão do Arnaldo</h1>
+        <p>Cabelo, Barba e Bigode com quem entende do assunto</p>
+    </header>
+
+    <div class="container">
+        <section class="services-section">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <div class="services-grid">
+                <div class="service-card"><h3>Corte Masculino</h3><p class="price">R$ 20,00</p><p>Corte moderno na tesoura ou máquina.</p></div>
+                <div class="service-card"><h3>Barba Completa</h3><p class="price">R$ 20,00</p><p>Design de barba com toalha quente e navalha.</p></div>
+                <div class="service-card"><h3>Combo Arnaldo</h3><p class="price">R$ 35,00</p><p>Corte de cabelo + barba completa com desconto.</p></div>
+            </div>
+        </section>
+
+        <section class="booking-section">
+            <h2 class="section-title">Agende seu Horário</h2>
+            <form id="agendamentoForm">
+                <div class="form-group"><label for="nome">Seu Nome:</label><input type="text" id="nome" required placeholder="Digite seu nome completo"></div>
+                <div class="form-group"><label for="servico">Escolha o Serviço:</label>
+                    <select id="servico" required>
+                        <option value="" disabled selected>Selecione um serviço...</option>
+                        <option value="Corte Masculino">Corte Masculino (R$ 40,00)</option>
+                        <option value="Barba Completa">Barba Completa (R$ 30,00)</option>
+                        <option value="Combo Arnaldo">Combo Arnaldo (Corte + Barba) (R$ 65,00)</option>
+                    </select>
+                </div>
+                <div class="form-group"><label for="data">Data desejada:</label><input type="date" id="data" required></div>
+                <div class="form-group"><label for="hora">Horário desejado:</label><input type="time" id="hora" required></div>
+                <button type="submit" class="btn-submit">Concluir no WhatsApp</button>
+            </form>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>Salão do Arnaldo</strong></p>
+        <p>Rua Ipatinga, 337 - Bairro São João</p>
+        <p>Sete Lagoas - MG | CEP: 35701-059</p>
+        <p>Telefone / WhatsApp: (31) 99520-7973</p>
+        <p style="margin-top:15px; font-size:.8rem;">&copy; 2026 Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('agendamentoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const servico = document.getElementById('servico').value;
+            const data = document.getElementById('data').value;
+            const hora = document.getElementById('hora').value;
+            const dataFormatada = data.split('-').reverse().join('/');
+            const numeroTelefone = '5531995207973'; 
+            const mensagem = `Olá, Arnaldo! Gostaria de agendar um horário:%0A%0A` +
+                             `*Nome:* ${encodeURIComponent(nome)}%0A` +
+                             `*Serviço:* ${encodeURIComponent(servico)}%0A` +
+                             `*Data:* ${encodeURIComponent(dataFormatada)}%0A` +
+                             `*Horário:* ${encodeURIComponent(hora)}`;
+            const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroTelefone}&text=${mensagem}`;
+            window.open(urlWhatsApp, '_blank');
+        });
+    </script>
+</body>
+</html>
